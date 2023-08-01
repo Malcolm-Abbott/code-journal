@@ -60,6 +60,10 @@ button {
   font-size: 1.4rem;
 }
 
+button:hover {
+  cursor: pointer;
+}
+
 .input-box,
 .button-box,
 .textarea-box {

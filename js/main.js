@@ -24,15 +24,6 @@ function formHandler(event) {
   values.entryId = data.nextEntryId;
   values.entryId++;
   data[0] = values;
-  $inputPhoto.setAttribute('src', '../images/placeholder-image-square.jpg');
+  $img.setAttribute('src', '../images/placeholder-image-square.jpg');
   $form.reset();
 }
-
-const title = $inputTitle.value;
-const photo = $inputPhoto.value;
-const values = {
-  title,
-  photo,
-};
-values.entryId = data.nextEntryId;
-values.entryId++;
