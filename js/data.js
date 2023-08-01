@@ -13,3 +13,7 @@ function dataHandler(event) {
 }
 
 window.addEventListener('beforeunload', dataHandler);
+
+if (localStorage.formData) {
+  data = JSON.parse(localStorage.formData);
+}
