@@ -22,8 +22,8 @@ function formHandler(event) {
     photo,
   };
   values.entryId = data.nextEntryId;
-  values.entryId++;
-  data[0] = values;
+  data.entries.push(values);
+  data.nextEntryId++;
   $img.setAttribute('src', '../images/placeholder-image-square.jpg');
   $form.reset();
 }
