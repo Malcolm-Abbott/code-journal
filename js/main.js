@@ -30,3 +30,8 @@ function formHandler(event) {
   $img.setAttribute('src', '../images/placeholder-image-square.jpg');
   $form.reset();
 }
+
+const $entryForm = document.querySelector('div[data-view="entry-form"]');
+$entryForm.className = 'hidden';
+const $entries = document.querySelector('div[data-view="entries"');
+$entries.classList.remove('hidden');
