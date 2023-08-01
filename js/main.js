@@ -12,10 +12,10 @@ const $form = document.querySelector('form');
 $form.addEventListener('submit', formHandler);
 
 const $inputTitle = document.querySelector('#title');
+const $textArea = document.querySelector('#notes');
 
 function formHandler(event) {
   event.preventDefault();
-  const $textArea = document.querySelector('#notes');
   const notes = $textArea.value;
   const title = $inputTitle.value;
   const photo = $inputPhoto.value;
