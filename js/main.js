@@ -7,3 +7,10 @@ function inputHandler(event) {
 }
 
 $inputPhoto.addEventListener('input', inputHandler);
+
+const $form = document.querySelector('form');
+$form.addEventListener('submit', formHandler);
+
+function formHandler(event) {
+  event.preventDefault();
+}
