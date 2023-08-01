@@ -15,14 +15,17 @@ const $inputTitle = document.querySelector('#title');
 
 function formHandler(event) {
   event.preventDefault();
+  const $textArea = document.querySelector('#notes');
+  const notes = $textArea.value;
   const title = $inputTitle.value;
   const photo = $inputPhoto.value;
   const values = {
     title,
     photo,
+    notes,
   };
   values.entryId = data.nextEntryId;
-  data.entries.push(values);
+  data.entries.unshift(values);
   data.nextEntryId++;
   $img.setAttribute('src', '../images/placeholder-image-square.jpg');
   $form.reset();

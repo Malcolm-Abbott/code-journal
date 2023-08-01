@@ -2,15 +2,12 @@ body {
   background-color: rgb(240, 240, 240);
 }
 
-.header {
+header {
+  background-color: rgb(86, 43, 129);
   font-size: 2rem;
   color: rgb(255, 255, 255);
   padding-top: 1rem;
   padding-bottom: 1rem;
-}
-
-header {
-  background-color: rgb(86, 43, 129);
 }
 
 h1 {
@@ -76,7 +73,7 @@ img {
   padding-bottom: 1.75rem;
 }
 
-@media only screen and (max-width: 480px) {
+/* @media only screen and (max-width: 480px) {
   header {
     padding-left: 1rem;
   }
@@ -92,4 +89,4 @@ img {
   header {
     padding-left: 4rem;
   }
-}
+} */
