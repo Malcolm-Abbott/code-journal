@@ -35,3 +35,28 @@ const $entryForm = document.querySelector('div[data-view="entry-form"]');
 $entryForm.className = 'hidden';
 const $entries = document.querySelector('div[data-view="entries"');
 $entries.classList.remove('hidden');
+
+function renderEntry(entry) {
+  const $ul = document.querySelector('ul');
+  const $li = document.createElement('li');
+  $li.className = 'row';
+  $ul.appendChild($li);
+  const $divColHalf = document.createElement('div');
+  $divColHalf.className = 'column-half';
+  const $divColHalfTwo = document.createElement('div');
+  $divColHalfTwo.className = 'column-half';
+  $li.appendChild($divColHalf);
+  const $img = document.createElement('img');
+  $img.setAttribute('src', entry.photo);
+  $divColHalf.appendChild($img);
+  $li.appendChild($divColHalfTwo);
+  const $h2 = document.createElement('h2');
+  $h2.textContent = entry.title;
+  $divColHalfTwo.appendChild($h2);
+  const $p = document.createElement('p');
+  $p.textContent = entry.notes;
+  $divColHalfTwo.appendChild($p);
+  return $li;
+}
+
+renderEntry(data[0]);
