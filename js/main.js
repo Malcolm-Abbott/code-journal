@@ -37,10 +37,8 @@ const $entries = document.querySelector('div[data-view="entries"');
 $entries.classList.remove('hidden');
 
 function renderEntry(entry) {
-  const $ul = document.querySelector('ul');
   const $li = document.createElement('li');
   $li.className = 'row';
-  $ul.appendChild($li);
   const $divColHalf = document.createElement('div');
   $divColHalf.className = 'column-half';
   const $divColHalfTwo = document.createElement('div');
@@ -59,12 +57,13 @@ function renderEntry(entry) {
   return $li;
 }
 
+const $ul = document.querySelector('ul');
+
 function documentHandler(event) {
-  let $domTree;
   for (let i = 0; i < data.entries.length; i++) {
-    $domTree = renderEntry(data.entries[i]);
+    const $entry = data.entries[i];
+    $ul.appendChild(renderEntry($entry));
   }
-  return $domTree;
 }
 
 document.addEventListener('DOMContentLoaded', documentHandler);
