@@ -31,11 +31,6 @@ function formHandler(event) {
   $form.reset();
 }
 
-const $entryForm = document.querySelector('div[data-view="entry-form"]');
-$entryForm.className = 'hidden';
-const $entries = document.querySelector('div[data-view="entries"');
-$entries.classList.remove('hidden');
-
 function renderEntry(entry) {
   const $li = document.createElement('li');
   $li.className = 'row';
@@ -79,3 +74,25 @@ function toggleNoEntries() {
 }
 
 toggleNoEntries();
+
+const $entryForm = document.querySelector('div[data-view="entry-form"]');
+const $entries = document.querySelector('div[data-view="entries"');
+
+function viewSwap(dataView) {
+  data.view = dataView;
+  if (dataView === 'entries') {
+    $entries.classList.remove('hidden');
+    $entryForm.classList.add('hidden');
+  } else if (dataView === 'entry-form') {
+    $entryForm.classList.remove('hidden');
+    $entries.classList.add('hidden');
+  }
+}
+
+const $a = document.querySelector('a');
+
+function anchorHandler(event) {
+  viewSwap('entries');
+}
+
+$a.addEventListener('click', anchorHandler);
