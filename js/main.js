@@ -59,4 +59,12 @@ function renderEntry(entry) {
   return $li;
 }
 
-renderEntry(data[0]);
+function documentHandler(event) {
+  let $domTree;
+  for (let i = 0; i < data.entries.length; i++) {
+    $domTree = renderEntry(data.entries[i]);
+  }
+  return $domTree;
+}
+
+document.addEventListener('DOMContentLoaded', documentHandler);
