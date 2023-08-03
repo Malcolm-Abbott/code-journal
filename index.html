@@ -19,7 +19,7 @@
     <header>
       <div class="container">
         <div class="row">
-          <div class="column-full">Code Journal</div>
+          <div class="column-full">Code Journal <a href="#">Entries</a></div>
         </div>
       </div>
     </header>
@@ -56,12 +56,27 @@
               <textarea id="notes" name="notes"></textarea>
             </div>
             <div class="column-full button-box">
-              <button type="submit" id="save-button" value="SAVE">SAVE</button>
+              <button
+                type="submit"
+                id="save-button"
+                value="SAVE"
+                class="form-button">
+                SAVE
+              </button>
             </div>
           </div>
         </form>
       </div>
-      <div data-view="entries" class="hidden"></div>
+      <div data-view="entries" class="hidden">
+        <div class="link-bar column-full">
+          <h1>Entries</h1>
+          <div class="entries-button-box">
+            <a href="#" class="entry-form-link">NEW</a>
+          </div>
+        </div>
+        <p class="no-entries">No entries have been recorded.</p>
+        <ul></ul>
+      </div>
     </main>
     <script src="js/data.js"></script>
     <script src="js/main.js"></script>
