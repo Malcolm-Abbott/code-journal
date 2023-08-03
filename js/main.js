@@ -63,6 +63,7 @@ function documentHandler(event) {
     $ul.appendChild(renderEntry($entry));
   }
   toggleNoEntries();
+  viewSwap(data.view);
 }
 
 document.addEventListener('DOMContentLoaded', documentHandler);
