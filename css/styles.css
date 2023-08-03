@@ -87,11 +87,15 @@ a {
   color: rgb(255, 255, 255);
 }
 
-.anchor-box {
+.link-bar {
+  display: flex;
+  justify-content: space-between;
+}
+
+.link-bar a {
   border-radius: 4px;
   border: 1px solid rgb(86, 43, 129);
   background-color: rgb(86, 43, 129);
-  color: rgb(255, 255, 255);
-  padding: 0.6rem 1.5rem;
+  padding: 0 1.5rem;
   font-size: 1.4rem;
 }
