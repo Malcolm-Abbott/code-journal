@@ -13,6 +13,8 @@ $form.addEventListener('submit', formHandler);
 
 const $inputTitle = document.querySelector('#title');
 const $textArea = document.querySelector('#notes');
+const $ul = document.querySelector('ul');
+const $noEntries = document.querySelector('.no-entries');
 
 function formHandler(event) {
   event.preventDefault();
@@ -29,6 +31,9 @@ function formHandler(event) {
   data.nextEntryId++;
   $img.setAttribute('src', '../images/placeholder-image-square.jpg');
   $form.reset();
+  $ul.prepend(renderEntry(values));
+  toggleNoEntries();
+  viewSwap('entries');
 }
 
 function renderEntry(entry) {
@@ -52,28 +57,23 @@ function renderEntry(entry) {
   return $li;
 }
 
-const $ul = document.querySelector('ul');
-
 function documentHandler(event) {
   for (let i = 0; i < data.entries.length; i++) {
     const $entry = data.entries[i];
     $ul.appendChild(renderEntry($entry));
   }
+  toggleNoEntries();
 }
 
 document.addEventListener('DOMContentLoaded', documentHandler);
 
-const $noEntries = document.querySelector('.no-entries');
-
 function toggleNoEntries() {
-  if (data.entries) {
+  if (data.entries.length > 0) {
     $noEntries.className = 'no-entries hidden';
   } else {
     $noEntries.className = 'no-entries';
   }
 }
-
-toggleNoEntries();
 
 const $entryForm = document.querySelector('div[data-view="entry-form"]');
 const $entries = document.querySelector('div[data-view="entries"');
