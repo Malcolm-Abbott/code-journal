@@ -97,3 +97,11 @@ function anchorHandler(event) {
 }
 
 $a.addEventListener('click', anchorHandler);
+
+const $entryFormLink = document.querySelector('.entry-form-link');
+
+function entryFormLinkHandler(event) {
+  viewSwap('entry-form');
+}
+
+$entryFormLink.addEventListener('click', entryFormLinkHandler);
