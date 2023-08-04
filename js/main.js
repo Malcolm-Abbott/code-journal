@@ -48,9 +48,15 @@ function renderEntry(entry) {
   $img.setAttribute('src', entry.photo);
   $divColHalf.appendChild($img);
   $li.appendChild($divColHalfTwo);
+  const $divPencilBox = document.createElement('div');
+  $divPencilBox.className = 'pencil-box';
+  $divColHalfTwo.appendChild($divPencilBox);
   const $h2 = document.createElement('h2');
   $h2.textContent = entry.title;
-  $divColHalfTwo.appendChild($h2);
+  $divPencilBox.appendChild($h2);
+  const $iPencil = document.createElement('i');
+  $iPencil.className = 'fa-solid fa-pen';
+  $divPencilBox.appendChild($iPencil);
   const $p = document.createElement('p');
   $p.textContent = entry.notes;
   $divColHalfTwo.appendChild($p);
