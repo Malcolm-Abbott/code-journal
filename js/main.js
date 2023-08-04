@@ -113,3 +113,17 @@ function entryFormLinkHandler(event) {
 }
 
 $entryFormLink.addEventListener('click', entryFormLinkHandler);
+
+function ulHandler(event) {
+  if (event.target.tagName === 'I') {
+    for (let i = 0; i < data.entries.length; i++) {
+      if (
+        data.entries[i].entryId ===
+        Number(event.target.closest().getAttribute('data-entry-id'))
+      ) {
+        data.editing = data.entries[i];
+      }
+    }
+  }
+}
+$ul.addEventListener('click', ulHandler);
