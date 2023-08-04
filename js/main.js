@@ -56,6 +56,7 @@ function renderEntry(entry) {
   $divPencilBox.appendChild($h2);
   const $iPencil = document.createElement('i');
   $iPencil.className = 'fa-solid fa-pen';
+  $iPencil.style.color = 'rgb(86, 43, 129)';
   $divPencilBox.appendChild($iPencil);
   const $p = document.createElement('p');
   $p.textContent = entry.notes;
