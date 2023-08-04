@@ -39,6 +39,7 @@ function formHandler(event) {
 function renderEntry(entry) {
   const $li = document.createElement('li');
   $li.className = 'row';
+  $li.setAttribute('data-entry-id', entry.entryId);
   const $divColHalf = document.createElement('div');
   $divColHalf.className = 'column-half';
   const $divColHalfTwo = document.createElement('div');
