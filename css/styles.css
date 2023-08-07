@@ -114,3 +114,7 @@ a {
   align-items: center;
   justify-content: space-between;
 }
+
+i:hover {
+  cursor: pointer;
+}

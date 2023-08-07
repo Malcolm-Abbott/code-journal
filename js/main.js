@@ -18,22 +18,37 @@ const $noEntries = document.querySelector('.no-entries');
 
 function formHandler(event) {
   event.preventDefault();
-  const notes = $textArea.value;
-  const title = $inputTitle.value;
-  const photo = $inputPhoto.value;
-  const values = {
-    title,
-    photo,
-    notes,
-  };
-  values.entryId = data.nextEntryId;
-  data.entries.unshift(values);
-  data.nextEntryId++;
-  $img.setAttribute('src', '../images/placeholder-image-square.jpg');
-  $form.reset();
-  $ul.prepend(renderEntry(values));
-  toggleNoEntries();
-  viewSwap('entries');
+  if (data.editing === null) {
+    const notes = $textArea.value;
+    const title = $inputTitle.value;
+    const photo = $inputPhoto.value;
+    const values = {
+      title,
+      photo,
+      notes,
+    };
+    values.entryId = data.nextEntryId;
+    data.entries.unshift(values);
+    data.nextEntryId++;
+    $img.setAttribute('src', '../images/placeholder-image-square.jpg');
+    $form.reset();
+    $ul.prepend(renderEntry(values));
+    toggleNoEntries();
+    viewSwap('entries');
+  } else if (data.editing !== null) {
+    for (let i = 0; i < data.entries.length; i++) {
+      const values = {
+        title: data.editing.title,
+        photo: data.editing.photo,
+        notes: data.editing.notes,
+      };
+      values.entryId = data.editing.entryId;
+      $form.reset();
+      $ul.prepend(renderEntry(values));
+      $a.textContent = 'New Entry';
+    }
+    data.editing = null;
+  }
 }
 
 function renderEntry(entry) {
@@ -116,14 +131,20 @@ $entryFormLink.addEventListener('click', entryFormLinkHandler);
 
 function ulHandler(event) {
   if (event.target.tagName === 'I') {
+    viewSwap('entry-form');
     for (let i = 0; i < data.entries.length; i++) {
       if (
         data.entries[i].entryId ===
-        Number(event.target.closest().getAttribute('data-entry-id'))
+        Number(event.target.closest('LI').getAttribute('data-entry-id'))
       ) {
         data.editing = data.entries[i];
       }
     }
+    $inputTitle.value = data.editing.title;
+    $inputPhoto.value = data.editing.photo;
+    $textArea.value = data.editing.notes;
+    $a.textContent = 'Edit Entry';
   }
 }
+
 $ul.addEventListener('click', ulHandler);
