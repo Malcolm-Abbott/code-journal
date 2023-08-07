@@ -35,7 +35,7 @@ function formHandler(event) {
     $ul.prepend(renderEntry(values));
     toggleNoEntries();
     viewSwap('entries');
-  } else if (data.editing !== null) {
+  } else {
     for (let i = 0; i < data.entries.length; i++) {
       const values = {
         title: data.editing.title,
@@ -46,8 +46,8 @@ function formHandler(event) {
       $form.reset();
       $ul.prepend(renderEntry(values));
       $a.textContent = 'New Entry';
+      data.editing = null;
     }
-    data.editing = null;
   }
 }
 
