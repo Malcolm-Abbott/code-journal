@@ -1,5 +1,6 @@
 const $inputPhoto = document.querySelector('#photo-url');
 const $img = document.querySelector('img');
+const $h1 = document.querySelector('h1');
 
 function inputHandler(event) {
   const photo = $inputPhoto.value;
@@ -18,37 +19,34 @@ const $noEntries = document.querySelector('.no-entries');
 
 function formHandler(event) {
   event.preventDefault();
+  const notes = $textArea.value;
+  const title = $inputTitle.value;
+  const photo = $inputPhoto.value;
+  const values = {
+    title,
+    photo,
+    notes,
+  };
   if (data.editing === null) {
-    const notes = $textArea.value;
-    const title = $inputTitle.value;
-    const photo = $inputPhoto.value;
-    const values = {
-      title,
-      photo,
-      notes,
-    };
     values.entryId = data.nextEntryId;
     data.entries.unshift(values);
     data.nextEntryId++;
-    $img.setAttribute('src', '../images/placeholder-image-square.jpg');
-    $form.reset();
     $ul.prepend(renderEntry(values));
-    toggleNoEntries();
-    viewSwap('entries');
   } else {
+    values.entryId = data.editing.entryId;
+    $ul.prepend(renderEntry(values));
     for (let i = 0; i < data.entries.length; i++) {
-      const values = {
-        title: data.editing.title,
-        photo: data.editing.photo,
-        notes: data.editing.notes,
-      };
-      values.entryId = data.editing.entryId;
-      $form.reset();
-      $ul.prepend(renderEntry(values));
-      $a.textContent = 'New Entry';
-      data.editing = null;
+      if (data.entries[i].entryId === data.editing.entryId) {
+        data.entries[i] = values;
+      }
     }
   }
+  $form.reset();
+  $img.setAttribute('src', '../images/placeholder-image-square.jpg');
+  toggleNoEntries();
+  viewSwap('entries');
+  $h1.textContent = 'New Entry';
+  data.editing = null;
 }
 
 function renderEntry(entry) {
@@ -143,7 +141,8 @@ function ulHandler(event) {
     $inputTitle.value = data.editing.title;
     $inputPhoto.value = data.editing.photo;
     $textArea.value = data.editing.notes;
-    $a.textContent = 'Edit Entry';
+    $h1.textContent = 'Edit Entry';
+    $img.setAttribute('src', data.editing.photo);
   }
 }
 
