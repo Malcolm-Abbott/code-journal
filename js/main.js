@@ -34,19 +34,20 @@ function formHandler(event) {
     $ul.prepend(renderEntry(values));
   } else {
     values.entryId = data.editing.entryId;
-    $ul.prepend(renderEntry(values));
+    const $liNodeList = document.querySelectorAll('li');
     for (let i = 0; i < data.entries.length; i++) {
       if (data.entries[i].entryId === data.editing.entryId) {
         data.entries[i] = values;
+        $liNodeList[i].replaceWith(renderEntry(values));
       }
     }
+    $h1.textContent = 'New Entry';
+    data.editing = null;
   }
   $form.reset();
   $img.setAttribute('src', '../images/placeholder-image-square.jpg');
   toggleNoEntries();
   viewSwap('entries');
-  $h1.textContent = 'New Entry';
-  data.editing = null;
 }
 
 function renderEntry(entry) {
