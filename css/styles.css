@@ -118,3 +118,16 @@ a {
 i:hover {
   cursor: pointer;
 }
+
+.buttons-start-end {
+  display: flex;
+  justify-content: space-between;
+}
+
+.delete-button {
+  color: rgb(220, 38, 38);
+  border: none;
+  padding: 0;
+  text-decoration: underline;
+  font-size: 1.5rem;
+}

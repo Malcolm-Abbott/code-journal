@@ -1,6 +1,8 @@
 const $inputPhoto = document.querySelector('#photo-url');
 const $img = document.querySelector('img');
 const $h1 = document.querySelector('h1');
+const $buttonBox = document.querySelector('.button-box');
+const $buttonDelete = document.querySelector('.delete-button');
 
 function inputHandler(event) {
   const photo = $inputPhoto.value;
@@ -124,6 +126,7 @@ const $entryFormLink = document.querySelector('.entry-form-link');
 
 function entryFormLinkHandler(event) {
   viewSwap('entry-form');
+  $form.reset();
 }
 
 $entryFormLink.addEventListener('click', entryFormLinkHandler);
@@ -144,6 +147,8 @@ function ulHandler(event) {
     $textArea.value = data.editing.notes;
     $h1.textContent = 'Edit Entry';
     $img.setAttribute('src', data.editing.photo);
+    $buttonBox.classList.add('buttons-start-end');
+    $buttonDelete.classList.remove('hidden');
   }
 }
 
