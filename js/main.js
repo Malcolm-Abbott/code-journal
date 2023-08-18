@@ -1,5 +1,6 @@
 const $inputPhoto = document.querySelector('#photo-url');
 const $img = document.querySelector('img');
+const $h1 = document.querySelector('h1');
 
 function inputHandler(event) {
   const photo = $inputPhoto.value;
@@ -26,12 +27,25 @@ function formHandler(event) {
     photo,
     notes,
   };
-  values.entryId = data.nextEntryId;
-  data.entries.unshift(values);
-  data.nextEntryId++;
-  $img.setAttribute('src', '../images/placeholder-image-square.jpg');
+  if (data.editing === null) {
+    values.entryId = data.nextEntryId;
+    data.entries.unshift(values);
+    data.nextEntryId++;
+    $ul.prepend(renderEntry(values));
+  } else {
+    values.entryId = data.editing.entryId;
+    const $liNodeList = document.querySelectorAll('li');
+    for (let i = 0; i < data.entries.length; i++) {
+      if (data.entries[i].entryId === data.editing.entryId) {
+        data.entries[i] = values;
+        $liNodeList[i].replaceWith(renderEntry(values));
+      }
+    }
+    $h1.textContent = 'New Entry';
+    data.editing = null;
+  }
   $form.reset();
-  $ul.prepend(renderEntry(values));
+  $img.setAttribute('src', '../images/placeholder-image-square.jpg');
   toggleNoEntries();
   viewSwap('entries');
 }
@@ -39,6 +53,7 @@ function formHandler(event) {
 function renderEntry(entry) {
   const $li = document.createElement('li');
   $li.className = 'row';
+  $li.setAttribute('data-entry-id', entry.entryId);
   const $divColHalf = document.createElement('div');
   $divColHalf.className = 'column-half';
   const $divColHalfTwo = document.createElement('div');
@@ -48,9 +63,16 @@ function renderEntry(entry) {
   $img.setAttribute('src', entry.photo);
   $divColHalf.appendChild($img);
   $li.appendChild($divColHalfTwo);
+  const $divPencilBox = document.createElement('div');
+  $divPencilBox.className = 'pencil-box';
+  $divColHalfTwo.appendChild($divPencilBox);
   const $h2 = document.createElement('h2');
   $h2.textContent = entry.title;
-  $divColHalfTwo.appendChild($h2);
+  $divPencilBox.appendChild($h2);
+  const $iPencil = document.createElement('i');
+  $iPencil.className = 'fa-solid fa-pen';
+  $iPencil.style.color = 'rgb(86, 43, 129)';
+  $divPencilBox.appendChild($iPencil);
   const $p = document.createElement('p');
   $p.textContent = entry.notes;
   $divColHalfTwo.appendChild($p);
@@ -105,3 +127,24 @@ function entryFormLinkHandler(event) {
 }
 
 $entryFormLink.addEventListener('click', entryFormLinkHandler);
+
+function ulHandler(event) {
+  if (event.target.tagName === 'I') {
+    viewSwap('entry-form');
+    for (let i = 0; i < data.entries.length; i++) {
+      if (
+        data.entries[i].entryId ===
+        Number(event.target.closest('LI').getAttribute('data-entry-id'))
+      ) {
+        data.editing = data.entries[i];
+      }
+    }
+    $inputTitle.value = data.editing.title;
+    $inputPhoto.value = data.editing.photo;
+    $textArea.value = data.editing.notes;
+    $h1.textContent = 'Edit Entry';
+    $img.setAttribute('src', data.editing.photo);
+  }
+}
+
+$ul.addEventListener('click', ulHandler);
